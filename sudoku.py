@@ -8,7 +8,7 @@ def _constraints():
     # generate the constraints
     variables = np.arange(729, dtype=np.int16).reshape((9, 9, 9))
     constraints = []
-    for axis in range(3):
+    for axis in [2, 1, 0]:
         # axis = 0: each column has a single instance of each label
         # axis = 1: each row has a single instance of each label
         # axis = 2: each cell has a single label
