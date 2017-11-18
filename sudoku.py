@@ -41,18 +41,18 @@ def _neighbors():
 # variable to neighbors
 v2n = _neighbors()
 
-def solve(hints):
-    """Solves a Sudoku puzzle."""
-    try: board = Board(parse(hints))
-    except ValueError: raise
-    for solution in _solve(board):
-        yield str(solution)
-
 def parse(hints):
     """Yields the givens from a hint string."""
     for index, label in enumerate(hints[:81]):
         if label not in '123456789': continue
         yield 9 * index + (int(label) - 1)
+
+def solve(givens):
+    """Solves a Sudoku puzzle."""
+    try: board = Board(givens)
+    except ValueError: raise
+    for solution in _solve(board):
+        yield solution
 
 def _solve(board):
     """Solves a Sudoku board"""
@@ -133,4 +133,4 @@ class Board(object):
 
 if __name__ == '__main__':
     import sys
-    print(next(solve(sys.argv[1])))
+    print(str(next(solve(parse(sys.argv[1])))))
