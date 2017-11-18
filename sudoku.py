@@ -63,7 +63,8 @@ def _solve(board):
     for variable in c2v[pivot]:
         if board.eliminated[variable]: continue
         board.select(variable)
-        yield from _solve(board)
+        for solution in _solve(board):
+            yield solution
         board.deselect(variable)
 
 class Board(object):
